@@ -16,9 +16,12 @@ Including another URLconf
 from django.urls import path, re_path
 from django.contrib import admin
 import Exercise.views as test_app
+from django.conf.urls import include
 
+# Couldn't get rest api framework's authentication to work on postman due to "csrf token missing"
 urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'occurrence/', test_app.AllOccurrence.as_view()),
     re_path(r'occurrence/(?P<pk>\d+)', test_app.OccurrenceView.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
 ]
