@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from enum import Enum
 from django_enum_choices.fields import EnumChoiceField
 
@@ -21,6 +21,7 @@ class Category(Enum):
 
 class Occurrence(models.Model):
     description = models.CharField(max_length=500)
+    # Couldn't install GDAL
     location = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     date_creation = models.DateField()
