@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
 from .models import Occurrence
 from .serializer import OccurrenceSerializer
 # Create your views here.
@@ -9,6 +11,7 @@ from .serializer import OccurrenceSerializer
 
 class AllOccurrence(ListAPIView):
 
+    permission_classes = [IsAuthenticated]
     queryset = Occurrence.objects.all()
     serializer_class = OccurrenceSerializer
 
@@ -21,6 +24,8 @@ class AllOccurrence(ListAPIView):
 
 
 class OccurrenceView(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk, format=None):
         try:
